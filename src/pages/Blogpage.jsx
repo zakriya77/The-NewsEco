@@ -11,7 +11,6 @@ const Blogpage = () => {
     const [blogPosts, setBlogPosts] = useState([]);
     const [selectedPost, setSelectedPost] = useState(null); // Track the selected blog post
     const [selectedCategory, setSelectedCategory] = useState(localStorage.getItem('selectedCategory') || 'general');
-    const apiKey = import.meta.env.VITE_NEWSAPI_KEY;
 
     // const handleCategorySelect = (category) => {
     //     setSelectedCategory(category);
@@ -21,7 +20,7 @@ const Blogpage = () => {
     useEffect(() => {
         const fetchBlogs = async () => {
             try {
-                const response = await axios.get(`https://newsapi.org/v2/top-headlines?country=us&category=${selectedCategory}&apiKey=${apiKey}`);
+                const response = await axios.get(`https://newsapi.org/v2/top-headlines?country=us&category=${selectedCategory}&apiKey=b3d2f387bb514c2e80b6b706e5fb67c9`);
                 setBlogPosts(response.data.articles);
                 console.log(response.data.articles);
             } catch (error) {

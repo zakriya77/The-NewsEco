@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 const BoxPopup = ({ selectedPost, setSelectedPost }) => {
     const [summary, setSummary] = useState('');
     const [generating, setGenerating] = useState(false);
+    const geminiKey = import.meta.env.VITE_GEMINI_API_KEY;
 
     useEffect(() => {
         const generateSummary = async () => {
@@ -11,7 +12,7 @@ const BoxPopup = ({ selectedPost, setSelectedPost }) => {
                 setGenerating(true);
                 try {
                     const res = await fetch(
-                        "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyAs9UxWgOrQlaVMzRuIxLJ7dVuzUgo1mY8",
+                        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${geminiKey}`,
                         {
                             method: 'POST',
                             headers: {

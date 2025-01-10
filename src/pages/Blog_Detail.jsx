@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 const Blog_Detail = () => {
     const location = useLocation();
     const blog = location.state?.blog; // Access the blog post object from the URL state
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     if (!blog) {
         return (
@@ -84,22 +88,17 @@ export default Blog_Detail;
 
 
 
- // const fetchBlog = async () => {
-    //     try {
-    //         // const response = await axios.get(
-    //         //     `https://newsapi.org/v2/top-headlines?country=us&apiKey=b3d2f387bb514c2e80b6b706e5fb67c9`
-    //         // );
-    //         // // Find the blog post by index (since NewsAPI doesn't support fetching by ID)
-    //         // const selectedBlog = response.data.articles[id];
-    //         // // setBlog(selectedBlog);
-    //         // setBlog(state.blog);
+// const fetchBlog = async () => {
+//     try {
+//         // const response = await axios.get(
+//         //     `https://newsapi.org/v2/top-headlines?country=us&apiKey=b3d2f387bb514c2e80b6b706e5fb67c9`
+//         // );
+//         // // Find the blog post by index (since NewsAPI doesn't support fetching by ID)
+//         // const selectedBlog = response.data.articles[id];
+//         // // setBlog(selectedBlog);
+//         // setBlog(state.blog);
 
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // };
-
-    // useEffect(() => {
-    //     window.scrollTo(0, 0);
-    //     fetchBlog();
-    // }, [state]);
+//     } catch (error) {
+//         console.log(error);
+//     }
+// };

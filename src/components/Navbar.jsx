@@ -12,13 +12,13 @@ const Navbar = () => {
 
     return (
         <motion.nav initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5 }} className="flex justify-between items-center h-[var(--navbarHeight)] w-full border-gray-600  border-b-[0.5px] px-4">
-            <Link to='/'><div className="font-semibold text-2xl">The NewsEco</div></Link>
+            <Link to='/'><div className="font-semibold text-2xl">The Blogium</div></Link>
             <ul className='flex gap-4'>
                 <NavLink to='/' style={navLinkActiveStyle}>
                     <li className='text-[0.9rem] cursor-pointer hover:text-gray-300'>Home</li>
                 </NavLink>
                 <NavLink to='/blog' style={navLinkActiveStyle}>
-                    <li className='text-[0.9rem] cursor-pointer hover:text-gray-300'>All News</li>
+                    <li className='text-[0.9rem] cursor-pointer hover:text-gray-300'>All Blogs</li>
                 </NavLink>
             </ul>
         </motion.nav>

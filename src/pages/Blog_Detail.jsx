@@ -1,33 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useLocation, useParams } from 'react-router-dom';
-import axios from 'axios';
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 const Blog_Detail = () => {
-    // const [blog, setBlog] = useState(null);
-    // const { id } = useParams();
     const location = useLocation();
     const blog = location.state?.blog; // Access the blog post object from the URL state
-
-
-    // const fetchBlog = async () => {
-    //     try {
-    //         // const response = await axios.get(
-    //         //     `https://newsapi.org/v2/top-headlines?country=us&apiKey=b3d2f387bb514c2e80b6b706e5fb67c9`
-    //         // );
-    //         // // Find the blog post by index (since NewsAPI doesn't support fetching by ID)
-    //         // const selectedBlog = response.data.articles[id];
-    //         // // setBlog(selectedBlog);
-    //         // setBlog(state.blog);
-
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // };
-
-    // useEffect(() => {
-    //     window.scrollTo(0, 0);
-    //     fetchBlog();
-    // }, [state]);
 
     if (!blog) {
         return (
@@ -50,14 +26,15 @@ const Blog_Detail = () => {
                     {/* Author Info */}
                     <div className="flex items-center gap-4">
                         <img
-                            src={blog.urlToImage || "https://via.placeholder.com/150"} // Fallback image
-                            alt={blog.title}
+                            src={blog.user.profile_image_90 || "https://via.placeholder.com/150"} // Fallback image
+                            alt={blog.user.name}
                             className="w-12 h-12 rounded-full"
                         />
                         <div>
-                            <h3 className="font-semibold text-white">{blog.author || "Unknown Author"}</h3>
+                            <h3 className="font-semibold text-white">{blog.user.name || "Unknown Author"}</h3>
                             <div className="flex items-center gap-4 text-sm text-gray-400">
-                                <span>{new Date(blog.publishedAt).toLocaleDateString()}</span>
+                                <span>{new Date(blog.published_at).toLocaleDateString()}</span>
+                                <span>{blog.reading_time_minutes} min read</span>
                             </div>
                         </div>
                     </div>
@@ -65,10 +42,10 @@ const Blog_Detail = () => {
             </div>
 
             {/* Cover Image */}
-            {blog.urlToImage && (
+            {blog.cover_image && (
                 <div className="max-w-4xl mx-auto px-4 py-8">
                     <img
-                        src={blog.urlToImage}
+                        src={blog.cover_image}
                         alt={blog.title}
                         className="w-full rounded-xl shadow-lg"
                     />
@@ -78,12 +55,15 @@ const Blog_Detail = () => {
             {/* Content */}
             <main className="max-w-4xl mx-auto px-4 py-8">
                 <p className="text-gray-300">{blog.description}</p>
-                <p className="text-gray-300 mt-4">{blog.content}</p>
+                <div
+                    className="text-gray-300 mt-4"
+                    dangerouslySetInnerHTML={{ __html: blog.body_html }} // Render HTML content
+                />
 
                 {/* Additional Meta */}
                 <div className="mt-12 pt-5 border-t border-gray-700">
                     <div className="flex justify-end flex-wrap gap-4 text-sm text-gray-400">
-                        <span>Published on: {new Date(blog.publishedAt).toLocaleDateString()}</span>
+                        <span>Published on: {new Date(blog.published_at).toLocaleDateString()}</span>
                         <Link
                             to={blog.url}
                             target="_blank"
@@ -100,3 +80,26 @@ const Blog_Detail = () => {
 };
 
 export default Blog_Detail;
+
+
+
+
+ // const fetchBlog = async () => {
+    //     try {
+    //         // const response = await axios.get(
+    //         //     `https://newsapi.org/v2/top-headlines?country=us&apiKey=b3d2f387bb514c2e80b6b706e5fb67c9`
+    //         // );
+    //         // // Find the blog post by index (since NewsAPI doesn't support fetching by ID)
+    //         // const selectedBlog = response.data.articles[id];
+    //         // // setBlog(selectedBlog);
+    //         // setBlog(state.blog);
+
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // };
+
+    // useEffect(() => {
+    //     window.scrollTo(0, 0);
+    //     fetchBlog();
+    // }, [state]);

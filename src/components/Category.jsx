@@ -2,13 +2,13 @@
 import React from 'react';
 
 const categories = [
-    "general",
-    "business",
-    "entertainment",
-    "health",
-    "science",
-    "sports",
-    "technology",
+    "webdev",
+    "discuss",
+    "devchallenge",
+    "ai",
+    "javascript",
+    "newyearchallenge",
+    "career"
 ];
 
 const Category = ({ selectedCategory, setSelectedCategory }) => {
